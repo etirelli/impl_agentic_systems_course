@@ -15,3 +15,18 @@ reporting_task:
     A fully fledged report with the main topics, each with a full section of information.
     Formatted as markdown without '```'
   agent: reporting_analyst
+
+retrieval_task:
+  description: >
+    Retrieve a list of issues from a GitHub for a specific repository
+  expected_output: >
+    A list of GitHub issues 
+  agent: team_lead
+
+analysis_task:
+  description: >
+    Analyze each issue against a list of established categories to map them 
+    to individual teams.
+  expected output: >
+    A list of categories that apply to the issue submitted.
+  agent: team_lead
