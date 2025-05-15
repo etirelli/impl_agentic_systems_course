@@ -47,6 +47,12 @@ class Ch3GithubIssues():
             config=self.tasks_config['categorization_task'],
             output_file='output/categorized.md'
         )
+    
+    @task
+    def update_task(self) -> Task:
+        return Task(
+            config=self.tasks_config['update_task']
+        )
 
     @crew
     def crew(self) -> Crew:
