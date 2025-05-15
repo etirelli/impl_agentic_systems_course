@@ -3,6 +3,8 @@ from crewai.project import CrewBase, agent, crew, task
 from crewai.agents.agent_builder.base_agent import BaseAgent
 from crewai_tools import GithubSearchTool
 from typing import List
+from ch3_github_issues.tools.custom_tool import MyCustomTool
+
 # If you want to run a snippet of code before or after the crew starts,
 # you can use the @before_kickoff and @after_kickoff decorators
 # https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
@@ -19,28 +21,31 @@ class Ch3GithubIssues():
     # Tasks: https://docs.crewai.com/concepts/tasks#yaml-configuration-recommended
     
     # If you would like to add tools to your agents, you can learn more about it here:
-    # https://docs.crewai.com/concepts/agents#agent-tools
+    # https://docs.crewai.com/concepts/agents#agent-tools    
     @agent
     def team_lead(self) -> Agent:
-         # Instantiate tools
-        github_tool = GithubSearchTool()
+        github_tool = MyCustomTool()
         return Agent(
-            config=self.agents_config['team_lead'], # type: ignore[index]
+            config=self.agents_config['team_lead'],
             tools=[github_tool],
             verbose=True
         )
-    
+
+    # To learn more about structured task outputs,
+    # task dependencies, and task callbacks, check out the documentation:
+    # https://docs.crewai.com/concepts/tasks#overview-of-a-task
     @task
     def retrieval_task(self) -> Task:
         return Task(
-            config=self.tasks_config['retrieval_task'], # type: ignore[index]
-            output_file='issues.md'
+            config=self.tasks_config['retrieval_task'],
+            output_file='output/issues.md'
         )
     
     @task
-    def analysis_task(self) -> Task:
+    def categorization_task(self) -> Task:
         return Task(
-            config=self.tasks_config['analysis_task'], # type: ignore[index]
+            config=self.tasks_config['categorization_task'],
+            output_file='output/categorized.md'
         )
 
     @crew
