@@ -1,17 +1,20 @@
-research_task:
+retrieval_task:
   description: >
-    Conduct a thorough research about {topic}
-    Make sure you find any interesting and relevant information given
-    the current year is {current_year}.
+    Retrieve the list of open issues from the GitHub repository called web2project/web2project.
   expected_output: >
-    A list with 10 bullet points of the most relevant information about {topic}
-  agent: researcher
+    Create a markdown table with the following columns: html_url and title.
+    The headers should be URL and Title.
+    The table should contain all open issues from the repository.
+  tool: MyCustomTool
+  agent: team_lead
 
-reporting_task:
+categorization_task:
   description: >
-    Review the context you got and expand each topic into a full section for a report.
-    Make sure the report is detailed and contains any and all relevant information.
+    Use the list of issues you got from the retrieval task and use the body of each to categorize 
+    the issue. The categories are: Security, Bug, Feature, Documentation, Authentication, User Interface, Database. 
+    Issues can be in multiple categories.
   expected_output: >
-    A fully fledged report with the main topics, each with a full section of information.
-    Formatted as markdown without '```'
-  agent: reporting_analyst
+    Create a markdown table with the following columns: html_url, title, and categories.
+    The headers should be URL, Title, and Categories.
+    The table should contain all open issues from the repository.
+  agent: team_lead

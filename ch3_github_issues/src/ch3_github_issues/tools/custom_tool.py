@@ -1,19 +1,42 @@
 from crewai.tools import BaseTool
 from typing import Type
 from pydantic import BaseModel, Field
-
+import requests
 
 class MyCustomToolInput(BaseModel):
     """Input schema for MyCustomTool."""
-    argument: str = Field(..., description="Description of the argument.")
+    argument: str = Field('repo', description="Repository name in the format 'owner/repo'.")
 
 class MyCustomTool(BaseTool):
-    name: str = "Name of my tool"
+    name: str = "MyCustomTool"
     description: str = (
-        "Clear description for what this tool is useful for, your agent will need this information to use it."
+        "This tool fetches issues from a GitHub repository. It takes a repository name in the format 'owner/repo' "
+        "and returns a list of issues. The tool uses the GitHub API to fetch the issues."
+        "Example: 'web2project/web2project' will return issues from the web2project repository."
     )
     args_schema: Type[BaseModel] = MyCustomToolInput
 
     def _run(self, argument: str) -> str:
         # Implementation goes here
-        return "this is an example of a tool output, ignore it and move along."
+        self.get_github_issues(argument)
+        # return "this is an example of a tool output, ignore it and move along."
+
+    def get_github_issues(self, repo: str) -> str:
+        """
+        Fetches issues from a GitHub repository.
+        
+        Args:
+            repo (str): The GitHub repository in the format 'owner/repo'.
+        
+        Returns:
+            str: A string representation of the issues.
+        """
+        print(f"Fetching issues for repository: {repo}")
+        url = f"https://api.github.com/repos/{repo}/issues"
+        response = requests.get(url)
+        
+        if response.status_code == 200:
+            issues = response.json()
+            return str(issues)
+        else:
+            return f"Error fetching issues: {response.status_code}"
