@@ -53,7 +53,8 @@ class MyCustomTool(BaseTool):
         Returns:
             str: A string representation of the issues.
         """
-        auth = Auth.Token("access_token")
+        token = os.environ.get("GITHUB_TOKEN")
+        auth = Auth.Token(token)
         g = Github(auth=auth)
         repo = g.get_repo(repo)
         issue = repo.get_issue(number=issueId)
