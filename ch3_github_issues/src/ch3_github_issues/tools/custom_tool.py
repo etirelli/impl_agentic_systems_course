@@ -2,6 +2,8 @@ from crewai.tools import BaseTool
 from typing import Type
 from pydantic import BaseModel, Field
 import requests
+from github import Github
+from github import Auth
 
 class MyCustomToolInput(BaseModel):
     """Input schema for MyCustomTool."""
@@ -18,8 +20,7 @@ class MyCustomTool(BaseTool):
 
     def _run(self, argument: str) -> str:
         # Implementation goes here
-        self.get_github_issues(argument)
-        # return "this is an example of a tool output, ignore it and move along."
+        return "this is an example of a tool output, ignore it and move along."
 
     def get_github_issues(self, repo: str) -> str:
         """
@@ -40,3 +41,20 @@ class MyCustomTool(BaseTool):
             return str(issues)
         else:
             return f"Error fetching issues: {response.status_code}"
+        
+
+    def update_github_issues(self, repo: str, issueId: int, labels: dict) -> str:
+        """
+        Updates issues in a GitHub repository.
+        
+        Args:
+            repo (str): The GitHub repository in the format 'owner/repo'.
+            labels (dict): 
+        Returns:
+            str: A string representation of the issues.
+        """
+        auth = Auth.Token("access_token")
+        g = Github(auth=auth)
+        repo = g.get_repo(repo)
+        issue = repo.get_issue(number=issueId)
+        issue.add_to_labels(labels)

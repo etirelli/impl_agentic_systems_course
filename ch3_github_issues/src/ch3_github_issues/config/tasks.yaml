@@ -18,3 +18,11 @@ categorization_task:
     The headers should be URL, Title, and Categories.
     The table should contain all open issues from the repository.
   agent: team_lead
+
+update_task:
+  description: >
+    Use the list of categorized issues from the categorization task to update each of the issues on Github.
+  expected output: >
+    Output a running list of each issue as it gets updated
+  tool: MyCustomTool
+  agent: team_lead
