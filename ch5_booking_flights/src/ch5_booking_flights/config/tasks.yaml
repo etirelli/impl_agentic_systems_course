@@ -1,0 +1,13 @@
+research_task:
+  description: >
+    Conduct a thorough search on flights from {departure_city} to {arrival_city} on {departure_date}.
+  expected_output: >
+    A list of the best flight options, including details such as:
+    - Departure and arrival times
+    - Flight number
+    - Duration of the flight
+    - Layover information (if any)
+    - Price
+    - Airline information
+    This list should be sorted by departure time.
+  agent: passenger
