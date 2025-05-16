@@ -22,8 +22,8 @@ def run():
     inputs = {
         'departure_city': 'AUS',
         'arrival_city': 'ORD',
-        'departure_date': str(mydate.year) + "-" + str(mydate.month) + "-" + str(mydate.day+7),
-        'return_date': str(mydate.year) + "-" + str(mydate.month) + "-" + str(mydate.day+14),
+        'departure_date': str(mydate.year) + "-" + str(mydate.strftime("%m")) + "-" + str(mydate.day+7),
+        'return_date': str(mydate.year) + "-" + str(mydate.strftime("%m")) + "-" + str(mydate.day+14),
     }
     
     try:
