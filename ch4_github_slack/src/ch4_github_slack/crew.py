@@ -2,13 +2,14 @@ from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from crewai.agents.agent_builder.base_agent import BaseAgent
 from typing import List
+from ch4_github_slack.tools.custom_tool import MyCustomTool
 # If you want to run a snippet of code before or after the crew starts,
 # you can use the @before_kickoff and @after_kickoff decorators
 # https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
 
 @CrewBase
-class Ch4GmailScheduling():
-    """Ch4GmailScheduling crew"""
+class Ch4GithubSlack():
+    """Ch4GithubSlack crew"""
 
     agents: List[BaseAgent]
     tasks: List[Task]
@@ -20,16 +21,11 @@ class Ch4GmailScheduling():
     # If you would like to add tools to your agents, you can learn more about it here:
     # https://docs.crewai.com/concepts/agents#agent-tools
     @agent
-    def researcher(self) -> Agent:
+    def team_lead(self) -> Agent:
+        github_tool = MyCustomTool()
         return Agent(
-            config=self.agents_config['researcher'], # type: ignore[index]
-            verbose=True
-        )
-
-    @agent
-    def reporting_analyst(self) -> Agent:
-        return Agent(
-            config=self.agents_config['reporting_analyst'], # type: ignore[index]
+            config=self.agents_config['team_lead'],
+            tools=[github_tool],
             verbose=True
         )
 
@@ -37,21 +33,22 @@ class Ch4GmailScheduling():
     # task dependencies, and task callbacks, check out the documentation:
     # https://docs.crewai.com/concepts/tasks#overview-of-a-task
     @task
-    def research_task(self) -> Task:
+    def retrieval_task(self) -> Task:
         return Task(
-            config=self.tasks_config['research_task'], # type: ignore[index]
+            config=self.tasks_config['retrieval_task'],
+            output_file='output/issues.md'
         )
-
+    
     @task
-    def reporting_task(self) -> Task:
+    def categorization_task(self) -> Task:
         return Task(
-            config=self.tasks_config['reporting_task'], # type: ignore[index]
-            output_file='report.md'
+            config=self.tasks_config['categorization_task'],
+            output_file='output/categorized.md'
         )
 
     @crew
     def crew(self) -> Crew:
-        """Creates the Ch4GmailScheduling crew"""
+        """Creates the Ch4GithubSlack crew"""
         # To learn how to add knowledge sources to your crew, check out the documentation:
         # https://docs.crewai.com/concepts/knowledge#what-is-knowledge
 

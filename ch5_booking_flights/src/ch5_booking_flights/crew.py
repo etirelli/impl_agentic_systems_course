@@ -23,9 +23,11 @@ class Ch5BookingFlights():
     # https://docs.crewai.com/concepts/agents#agent-tools
     @agent
     def passenger(self) -> Agent:
+        flight_tool = FlightTool()
         return Agent(
             config=self.agents_config['passenger'], # type: ignore[index]
-            verbose=True
+            verbose=True,
+            tools=[flight_tool],
         )
 
     # To learn more about structured task outputs,
@@ -33,11 +35,9 @@ class Ch5BookingFlights():
     # https://docs.crewai.com/concepts/tasks#overview-of-a-task
     @task
     def research_task(self) -> Task:
-        flight_tool = FlightTool()
         return Task(
             config=self.tasks_config['research_task'], # type: ignore[index]
             output_file='output/flights.md',
-            tools=[flight_tool],
         )
 
     @crew
