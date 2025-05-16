@@ -17,11 +17,13 @@ def run():
     """
     Run the crew.
     """
+    mydate = datetime.now()
+
     inputs = {
-        'departure_city': 'Austin',
-        'arrival_city': 'Chicago',
-        'departure_date': '2025-07-01',
-        'current_year': str(datetime.now().year)
+        'departure_city': 'AUS',
+        'arrival_city': 'ORD',
+        'departure_date': str(mydate.year) + "-" + str(mydate.month) + "-" + str(mydate.day+7),
+        'return_date': str(mydate.year) + "-" + str(mydate.month) + "-" + str(mydate.day+14),
     }
     
     try:
