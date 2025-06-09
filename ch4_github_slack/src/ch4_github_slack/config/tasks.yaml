@@ -21,8 +21,11 @@ categorization_task:
 
 notification_task:
   description: >
-    This task lets us post an issue to a specific Slack channel.
+    This task lets us post an issue to a specific Slack channel. 
+    Any issues that are categorized as Security should be posted to the #team-security channel with Channel ID C08STT66BH8.
+    Any issues that are categorized as User Interface should be posted to the #team-design channel with Channel ID C08SV6LE02Y.
+    Any issues that are categorized as Authentication should be posted to the #team-authentication channel with Channel ID C08SGQDMPJ7.
   expected_output: >
-    This should give us an HTTP response code letting us know if it worked or failed.
+    This will post each issue into the Slack channel based on its category and let us know the result.
   tool: SlackTool
-  agent: team_lead
+  agent: project_manager

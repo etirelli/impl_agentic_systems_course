@@ -26,10 +26,18 @@ class Ch4GithubSlack():
     @agent
     def team_lead(self) -> Agent:
         github_tool = MyCustomTool()
-        slack_tool = SlackTool()
         return Agent(
             config=self.agents_config['team_lead'],
-            tools=[github_tool, slack_tool],
+            tools=[github_tool],
+            verbose=True
+        )
+
+    @agent
+    def project_manager(self) -> Agent:
+        slack_tool = SlackTool()
+        return Agent(
+            config=self.agents_config['project_manager'],
+            tools=[slack_tool],
             verbose=True
         )
 

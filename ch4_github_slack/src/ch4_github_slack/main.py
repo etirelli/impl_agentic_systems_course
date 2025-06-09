@@ -19,7 +19,8 @@ def run():
     """
     inputs = {
         'topic': 'AI LLMs',
-        'slackworkspace': 'A08SD4F6FN3',
+        'slack_channel': 'C08SGQDMPJ7',
+        'message': 'hello world',
         'current_year': str(datetime.now().year)
     }
     
