@@ -1,0 +1,23 @@
+[project]
+name = "ch4_github_slack"
+version = "0.1.0"
+description = "ch4-github-slack using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "crewai[tools]>=0.120.0,<1.0.0"
+]
+
+[project.scripts]
+ch4_github_slack = "ch4_github_slack.main:run"
+run_crew = "ch4_github_slack.main:run"
+train = "ch4_github_slack.main:train"
+replay = "ch4_github_slack.main:replay"
+test = "ch4_github_slack.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"

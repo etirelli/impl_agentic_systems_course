@@ -4,7 +4,7 @@ import warnings
 
 from datetime import datetime
 
-from ch4_gmail_scheduling.crew import Ch4GmailScheduling
+from ch4_github_slack.crew import Ch4GithubSlack
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
@@ -19,11 +19,13 @@ def run():
     """
     inputs = {
         'topic': 'AI LLMs',
+        'slack_channel': 'C08SGQDMPJ7',
+        'message': 'hello world',
         'current_year': str(datetime.now().year)
     }
     
     try:
-        Ch4GmailScheduling().crew().kickoff(inputs=inputs)
+        Ch4GithubSlack().crew().kickoff(inputs=inputs)
     except Exception as e:
         raise Exception(f"An error occurred while running the crew: {e}")
 
@@ -37,7 +39,7 @@ def train():
         'current_year': str(datetime.now().year)
     }
     try:
-        Ch4GmailScheduling().crew().train(n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=inputs)
+        Ch4GithubSlack().crew().train(n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=inputs)
 
     except Exception as e:
         raise Exception(f"An error occurred while training the crew: {e}")
@@ -47,7 +49,7 @@ def replay():
     Replay the crew execution from a specific task.
     """
     try:
-        Ch4GmailScheduling().crew().replay(task_id=sys.argv[1])
+        Ch4GithubSlack().crew().replay(task_id=sys.argv[1])
 
     except Exception as e:
         raise Exception(f"An error occurred while replaying the crew: {e}")
@@ -62,7 +64,7 @@ def test():
     }
     
     try:
-        Ch4GmailScheduling().crew().test(n_iterations=int(sys.argv[1]), eval_llm=sys.argv[2], inputs=inputs)
+        Ch4GithubSlack().crew().test(n_iterations=int(sys.argv[1]), eval_llm=sys.argv[2], inputs=inputs)
 
     except Exception as e:
         raise Exception(f"An error occurred while testing the crew: {e}")

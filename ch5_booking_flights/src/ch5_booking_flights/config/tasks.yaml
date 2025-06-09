@@ -10,4 +10,5 @@ research_task:
     - Price
     - Airline information
     This list should be sorted by departure time.
+  tool: FlightTool
   agent: passenger
