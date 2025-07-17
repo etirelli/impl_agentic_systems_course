@@ -1,5 +1,5 @@
-# Building Agentic Systems
-This is the repository for the LinkedIn Learning course `Building Agentic Systems`. The full course is available from [LinkedIn Learning][lil-course-url].
+# Hands-On AI: Implementing Agentic Systems
+This is the repository for the LinkedIn Learning course `Hands-On AI: Implementing Agentic Systems`. The full course is available from [LinkedIn Learning][lil-course-url].
 
 _See the readme file in the main branch for updated instructions and information._
 ## Instructions
