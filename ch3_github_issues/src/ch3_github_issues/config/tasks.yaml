@@ -5,7 +5,7 @@ retrieval_task:
     Create a markdown table with the following columns: html_url and title.
     The headers should be URL and Title.
     The table should contain all open issues from the repository.
-  tool: MyCustomTool
+  tool: get_github_issues
   agent: team_lead
 
 categorization_task:
@@ -22,7 +22,7 @@ categorization_task:
 update_task:
   description: >
     Use the list of categorized issues from the categorization task to update each of the issues on Github.
-  expected output: >
+  expected_output: >
     Output a running list of each issue as it gets updated
-  tool: MyCustomTool
+  tool: update_github_issues
   agent: team_lead
